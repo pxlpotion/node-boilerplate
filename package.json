@@ -1,0 +1,25 @@
+{
+  "name": "6thman",
+  "version": "1.0.0",
+  "description": "6th Man Movers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pxlpotion/6thman.git"
+  },
+  "author": "PxlPotion",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/pxlpotion/6thman/issues"
+  },
+  "homepage": "https://github.com/pxlpotion/6thman#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
+  }
+}
