@@ -1,28 +1,21 @@
 'use strict'
 
-let express =      require('express');
-let path =         require('path');
-let logger =       require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser =   require('body-parser');
-
+const express = require('express');
+const config = require('./config/config');
 const app = express();
 
-// Setup Views
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// Configure Express
+require('./config/express')(app, config);
 
-// Logger
-app.use(logger('dev'));
+// Start the server
+const server = app.listen(config.port, () => {
+  console.log(`${config.app.name} listening on PORT : ${config.port}`);
+});
 
-// Body Parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-// Static
-app.use(express.static(path.join(__dirname, 'public')));
-
-const server = app.listen(3000, () => {
-  console.log(`App listening on PORT : 3000`);
+// Exception handling
+process.on('uncaughtException', function(err) {
+  console.error(err);
+  server.close(function(){
+    process.exit(1);
+  });
 });
