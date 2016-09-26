@@ -14,13 +14,13 @@ const config = {
     },
     port: 3000,
     db: {
-      MONGODB_URI: process.env.SIXTHMAN_MONGODB_URI
+      MONGODB_URI: process.env[appName + '_MONGODB_URI']
     },
     redis: {
-      REDIS_URL: process.env.SIXTHMAN_REDIS_URL
+      REDIS_URL: process.env[appName + '_REDIS_URL']
     },
     logs: {
-      LE_TOKEN: process.env.SIXTHMAN_LE_TOKEN
+      LE_TOKEN: process.env[appName + '_LE_TOKEN']
     }
   },
   staging: {
