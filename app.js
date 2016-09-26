@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express');
-const config = require('./config/config.js');
+const config = require('./config/config');
 const app = express();
 
 // Configure Express
