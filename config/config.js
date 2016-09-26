@@ -3,14 +3,14 @@
 const path = require('path');
 const rootPath = path.normalize(__dirname + '/..');
 const env = process.env.NODE_ENV || 'development';
-const appname = '6th Man Movers';
+const appName = 'appName';
 
 const config = {
   development: {
     env: 'development',
     root: rootPath,
     app: {
-      name: appname
+      name: appName
     },
     port: 3000,
     db: {
@@ -27,7 +27,7 @@ const config = {
     env: 'staging',
     root: rootPath,
     app: {
-      name: appname
+      name: appName
     },
     port: process.env.PORT,
     db: {
@@ -44,7 +44,7 @@ const config = {
     env: 'production',
     root: rootPath,
     app: {
-        name: appname
+        name: appName
     },
     port: process.env.PORT,
     db: {
