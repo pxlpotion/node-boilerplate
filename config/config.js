@@ -12,7 +12,16 @@ const config = {
     app: {
       name: appname
     },
-    port: 3000
+    port: 3000,
+    db: {
+      MONGODB_URI: process.env.MONGODB_URI
+    },
+    redis: {
+      REDIS_URL: process.env.REDIS_URL
+    },
+    logs: {
+      LE_TOKEN: process.env.LE_TOKEN
+    }
   },
   staging: {
     env: 'staging',
@@ -20,7 +29,16 @@ const config = {
     app: {
       name: appname
     },
-    port: process.env.PORT
+    port: process.env.PORT,
+    db: {
+      MONGODB_URI: process.env.MONGODB_URI
+    },
+    redis: {
+      REDIS_URL: process.env.REDIS_URL
+    },
+    logs: {
+      LE_TOKEN: process.env.LE_TOKEN
+    }
   },
   production: {
     env: 'production',
@@ -28,7 +46,16 @@ const config = {
     app: {
         name: appname
     },
-    port: process.env.PORT
+    port: process.env.PORT,
+    db: {
+      MONGODB_URI: process.env.MONGODB_URI
+    },
+    redis: {
+      REDIS_URL: process.env.REDIS_URL
+    },
+    logs: {
+      LE_TOKEN: process.env.LE_TOKEN
+    }
   }
 };
 
