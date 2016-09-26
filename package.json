@@ -1,5 +1,5 @@
 {
-  "name": "Pxl Potion Boilerplate",
+  "name": "node-boilerplate",
   "version": "1.0.0",
   "description": "This repo will serve as a boilerplate for standard MVC style Node.js applications. The application is built with minimum dependencies and is meant to be expanded on a per project basis.",
   "main": "app.js",
