@@ -2,8 +2,8 @@
 
 const path = require('path');
 const rootPath = path.normalize(__dirname + '/..');
-const env = process.env.NODE_ENV || 'local';
-const appname = '6th Man Movers'
+const env = process.env.NODE_ENV || 'development';
+const appname = '6th Man Movers';
 
 const config = {
   development: {
