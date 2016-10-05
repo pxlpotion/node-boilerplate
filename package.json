@@ -29,6 +29,7 @@
     "moment": "^2.14.1"
   },
   "devDependencies": {
-    "nodemon": "^1.10.0"
+    "nodemon": "^1.10.0",
+    "webpack": "^1.13.2"
   }
 }
