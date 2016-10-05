@@ -29,10 +29,6 @@
     "moment": "^2.14.1"
   },
   "devDependencies": {
-    "babel-core": "^6.17.0",
-    "babel-loader": "^6.2.5",
-    "babel-preset-es2015": "^6.16.0",
-    "nodemon": "^1.10.0",
-    "webpack": "^1.13.2"
+    "nodemon": "^1.10.0"
   }
 }
