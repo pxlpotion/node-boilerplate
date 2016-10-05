@@ -21,7 +21,6 @@ module.exports = (app, config) => {
 
   // Make some stuff available to Jade
   app.locals.moment = require('moment');
-  app.locals.env = config.env;
 
   // Manage Req's and Res's
   app.use(compress());
