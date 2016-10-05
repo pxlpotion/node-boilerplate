@@ -1,17 +1,18 @@
 'use strict';
 
-var debug = process.env.NODE_ENV !== 'production',
-    webpack = require('webpack');
+const config = require('./config/config'),
+      isDev = config.env !== 'production',
+      webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  devtool: debug ? 'inline-sourcemap' : null,
-  entry: './js/scripts.js',
+  devtool: isDev ? 'inline-sourcemap' : null,
+  entry: './app/client/main.js',
   output: {
-    path: __dirname + '/js',
+    path: isDev ? __dirname + '/build/src' : __dirname + '/build/dist',
     filename: 'scripts.min.js'
   },
-  plugins: debug ? [] : [
+  plugins: isDev ? [] : [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
