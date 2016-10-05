@@ -67,7 +67,7 @@ gulp.task('js', function(){
 });
 
 // Define the watch task
-gulp.task('watch', function() {
+gulp.task('observe', function() {
   // Watch SASS files
   const sassWatcher = gulp.watch(`${config.path.entry_point}/**/*.scss`, ['sass']);
   sassWatcher.on('change', (e) => {console.log(`SASS ${e.type}: ${e.path}`);});
@@ -109,5 +109,5 @@ gulp.task('build', function() {
 
 // Watch assets for development
 gulp.task('watch', function() {
-  return runSequence('config-dev', 'watch');
+  return runSequence('config-dev', 'observe');
 });
