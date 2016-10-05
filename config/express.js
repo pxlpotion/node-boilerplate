@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const fs = require('fs');
@@ -11,7 +11,7 @@ const methodOverride = require('method-override');
 module.exports = (app, config) => {
 
   // Views
-  app.set('views', config.root + '/app/views');
+  app.set('views', config.root + '/app/server/views');
   app.set('view engine', 'jade');
 
   // Body/Cookie Parser
@@ -27,7 +27,7 @@ module.exports = (app, config) => {
   app.use(methodOverride());
 
   // Serve static assets
-  app.use(express.static(config.root + '/public'));
+  app.use(express.static(config.root + config.app.assets_path));
 
   // Recursive loading will load all files in given path and all subdirectories
   const loadRecursively = (path) => {

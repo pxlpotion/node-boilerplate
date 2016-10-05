@@ -10,7 +10,8 @@ const config = {
     env: 'development',
     root: rootPath,
     app: {
-      name: appName
+      name: appName,
+      assets_path: '/build/src'
     },
     port: 3000,
     db: {
@@ -27,7 +28,8 @@ const config = {
     env: 'staging',
     root: rootPath,
     app: {
-      name: appName
+      name: appName,
+      assets_path: '/build/dist'
     },
     port: process.env.PORT,
     db: {
@@ -44,7 +46,8 @@ const config = {
     env: 'production',
     root: rootPath,
     app: {
-        name: appName
+      name: appName,
+      assets_path: '/build/dist'
     },
     port: process.env.PORT,
     db: {
