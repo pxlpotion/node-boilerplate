@@ -41,11 +41,11 @@ module.exports = (app, config) => {
   };
 
   // Load Middleware
-  const middlewaresPath = path.join(__dirname, '../app/middlewares');
+  const middlewaresPath = path.join(__dirname, '../app/server/middlewares');
   loadRecursively(middlewaresPath);
 
   // Load Controllers
-  const controllersPath = path.join(__dirname, '../app/controllers');
+  const controllersPath = path.join(__dirname, '../app/server/controllers');
   loadRecursively(controllersPath);
 
 };
