@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    meta(name='apple-mobile-web-app-title' content='')
+    meta(name='application-name' content='')
+    meta(name='msapplication-TileImage' content='')
+    meta(name='msapplication-TileColor' content='')
+
+    link(rel='icon' type='image/png' href='')
+    link(rel='apple-touch-icon' href='')
+
+    title #{title}
+
+    -// CSS (all other files should be built via gulp, see app/client/main.scss)
+    link(rel='stylesheet', href='/src')
+
+  -// Body and Main Content
+  body
+    block content
+
+    -// JS (all other files should be built via gulp, see app/client/main.js)
+    script(src='http://localhost:35729/livereload.js')
+
