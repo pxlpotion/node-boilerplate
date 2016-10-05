@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const config = require('./config/config');
@@ -13,9 +13,9 @@ const server = app.listen(config.port, () => {
 });
 
 // Exception handling
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', (err) => {
   console.error(err);
-  server.close(function(){
+  server.close(() => {
     process.exit(1);
   });
 });

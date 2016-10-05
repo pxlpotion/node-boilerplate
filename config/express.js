@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
 
-module.exports = function(app, config) {
+module.exports = (app, config) => {
 
   // Views
   app.set('views', config.root + '/app/views');
@@ -30,8 +30,8 @@ module.exports = function(app, config) {
   app.use(express.static(config.root + '/public'));
 
   // Recursive loading will load all files in given path and all subdirectories
-  const loadRecursively = function(path){
-    fs.readdirSync(path).forEach(function (file) {
+  const loadRecursively = (path) => {
+    fs.readdirSync(path).forEach((file) => {
       if (file.indexOf('.js') >= 0) {
         require(path + '/' + file)(app, config);
       } else {
