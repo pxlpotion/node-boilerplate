@@ -1,1 +1,1 @@
-console.log('I am an example bundled scrript file!');
+console.log('I am an example bundled script file!');

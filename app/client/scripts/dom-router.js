@@ -1,5 +1,13 @@
 const $ = require('jquery');
 
+/* ========================================================================
+ * DOM-based Routing
+ * Based on http://goo.gl/EUTi53 by Paul Irish
+ *
+ * Only fires on body classes that match ("about" for example). If a body class contains a dash,
+ * replace the dash with an underscore when adding it to the object below.
+ * ======================================================================== */
+
 // The routing fires all common scripts, followed by the page specific scripts.
 // Add additional events for more control over timing e.g. a finalize event
 const domRouter = (namespace) => {
