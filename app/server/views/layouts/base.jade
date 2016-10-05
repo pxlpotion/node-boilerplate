@@ -17,14 +17,12 @@ html(lang='en')
     title #{title}
 
     -// CSS (all other files should be built via gulp, see app/client/main.scss)
-    - var cssPath = env === 'production' ? '/dist/main.css' : '/src/main.css'
-    link(rel='stylesheet', href='#{cssPath}')
+    link(rel='stylesheet', href='/main.css')
 
   -// Body and Main Content
   body
     block content
 
     -// JS (all other files should be built via gulp, see app/client/main.js)
-    - var jsPath = env === 'production' ? '/dist/bundle.min.js' : '/src/bundle.js'
-    script(src='#{jsPath}')
+    script(src='/bundle.js')
 

@@ -27,12 +27,10 @@ var returnConfig = function(mode) {
     path: path,
     js: {
       out: 'bundle.js',
-      min_out: 'bundle.min.js',
       entry_point: `${path.entry_point}/main.js`
     },
     sass: {
       out: 'style.css',
-      min_out: 'style.min.css',
       entry_point: `${path.entry_point}/main.scss`
     }
   };
@@ -61,8 +59,8 @@ gulp.task('js', function(){
     transform: [['babelify', {presets: ['es2015']}]]
   })
     .bundle()
-    .pipe(source(config.js.min_out))
-    .pipe(streamify(uglify(config.js.min_out)).on('error', (e) => {console.log(e);}))
+    .pipe(source(config.js.out))
+    .pipe(streamify(uglify(config.js.out)).on('error', (e) => {console.log(e);}))
     .pipe(gulp.dest(config.path.dest));
 });
 
