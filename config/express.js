@@ -19,8 +19,9 @@ module.exports = (app, config) => {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
 
-  // Make Moment.js available to Jade
+  // Make some stuff available to Jade
   app.locals.moment = require('moment');
+  app.locals.env = config.env;
 
   // Manage Req's and Res's
   app.use(compress());
