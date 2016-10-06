@@ -102,15 +102,14 @@ gulp.task('config:dev', function() {
 });
 
 // Build assets for production
-gulp.task('build', function() {
+gulp.task('build', ['config:prod'], function() {
   return runSequence(
-    'config:prod',
     'clean',
     ['js', 'sass', 'img']
   );
 });
 
 // Watch assets for development
-gulp.task('watch', function() {
-  return runSequence('config:dev', 'observe');
+gulp.task('watch', ['config:dev'], function() {
+  return runSequence('observe');
 });
