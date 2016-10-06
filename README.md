@@ -21,12 +21,12 @@ The app should now be running on: `http://localhost:3000`. Note that this start 
 The app makes no assumptions on models or what DB to use. You will need to setup your models in `app/models` and then setup your DB connection in `/config/express.js` and `/config/config.js`.
 
 ### Client side
-CSS
+JS
 
 - Navigate to the `/app/client/scripts/example.js` file and either delete it or rename/refactor it.
 - Navigate to the `/app/client/main.js` file and update it accordingly.
 
-JS
+CSS
 
 - Navigate to the `/app/client/styles/example.scss` file and either delete it or rename/refactor it.
 - Navigate to the `/app/client/main.scss` file and update it accordingly.
