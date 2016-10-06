@@ -12,7 +12,7 @@
     "url": "git+https://github.com/pxlpotion/6thman.git"
   },
   "author": "PxlPotion",
-  "license": "",
+  "license": "private",
   "bugs": {
     "url": "https://github.com/pxlpotion/node-boilerplate/issues"
   },
