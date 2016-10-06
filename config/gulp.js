@@ -9,6 +9,9 @@ const returnConfig = function(mode) {
   };
   let config = {
     path: path,
+    img: {
+      entry_point: `${path.entry_point}/images`
+    },
     js: {
       out: 'bundle.js',
       entry_point: `${path.entry_point}/main.js`
