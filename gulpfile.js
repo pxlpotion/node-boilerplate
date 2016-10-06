@@ -1,7 +1,8 @@
 'use strict';
 
 // Gulp and plugins
-const gulp = require('gulp'),
+const returnConfig = require('./config/gulp'),
+      gulp = require('gulp'),
       uglify = require('gulp-uglify'),
       source = require('vinyl-source-stream'),
       browserify = require('browserify'),
@@ -13,29 +14,8 @@ const gulp = require('gulp'),
       prefixCSS = require('gulp-autoprefixer'),
       minifyCSS = require('gulp-minify-css');
 
-
-// Paths for each task
-// `config` is set before tasks are run via gulp CLI task which runs `returnConfig`
-let config = {};
-var returnConfig = function(mode) {
-  mode = mode === 'prod' ? 'dist' : 'src';
-  let path = {
-    dest: `build/${mode}`,
-    entry_point: `app/client`
-  };
-  let config = {
-    path: path,
-    js: {
-      out: 'bundle.js',
-      entry_point: `${path.entry_point}/main.js`
-    },
-    sass: {
-      out: 'style.css',
-      entry_point: `${path.entry_point}/main.scss`
-    }
-  };
-  return config;
-};
+// Define a generic config, this will be dynamically set before running any tasks
+let config = returnConfig();
 
 // Clean the target dir
 gulp.task('clean', function () {
