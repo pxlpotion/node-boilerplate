@@ -1,14 +1,17 @@
 # Pxl Potion Node/Express Boilerplate
 This repo will serve as a boilerplate for standard MVC style Node.js applications. The application is built with minimum dependencies and is meant to be expanded on a per project basis.
 
-## To run:
+## To run in development mode:
 - `git clone https://github.com/pxlpotion/node-boilerplate.git`
 - `cd node-boilerplate`
 - `npm install`
-- `npm run build`
-- `npm start`
+- `npm run watch`
 
-The app should now be running on: `http://localhost:3000`. Note that this start script uses `nodemon` to monitor for changes and restart the server. A production script should be written to handle different deployments.
+The app should now be running on: `http://localhost:3000`. 
+
+NOTES:
+- A production script should be written to handle different deployments. There is no pre-described deployment script included.
+- Any new CLI commands should be "piped" through an NPM script to keep things consistent. For example, a new Gulp script should be defined like `"exampleTask" : "gulp exampleTask"` in the scripts section of `package.json` and then run with NPM like `npm run exampleTask`
 
 ## What to do next:
 
