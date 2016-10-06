@@ -12,7 +12,7 @@ module.exports = (app, config) => {
 
   // Views
   app.set('views', config.root + '/app/server/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'pug');
 
   // Body/Cookie Parser
   app.use(bodyParser.json());
