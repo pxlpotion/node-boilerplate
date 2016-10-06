@@ -13,7 +13,7 @@ const returnConfig = require('./config/gulp'),
       sass = require('gulp-sass'),
       prefixCSS = require('gulp-autoprefixer'),
       minifyCSS = require('gulp-minify-css'),
-      imagemin     = require('gulp-imagemin');
+      imagemin  = require('gulp-imagemin');
 
 // Define a generic config, this will be dynamically set before running any tasks
 let config = returnConfig();
