@@ -12,15 +12,35 @@ const returnConfig = require('./config/gulp'),
       clean = require('gulp-clean'),
       sass = require('gulp-sass'),
       prefixCSS = require('gulp-autoprefixer'),
-      minifyCSS = require('gulp-minify-css');
+      minifyCSS = require('gulp-minify-css'),
+      imagemin     = require('gulp-imagemin');
 
 // Define a generic config, this will be dynamically set before running any tasks
 let config = returnConfig();
 
-// Clean the target dir
+// Clean the enire target dir
 gulp.task('clean', function () {
   return gulp.src(config.path.dest, {read: false})
     .pipe(clean());
+});
+
+// Clean just the img dir
+// Used for watching imgs because we compress and pipe all imgs at once, which differs from
+// JS/SASS which just replaces a single file
+gulp.task('clean:img', function () {
+  return gulp.src(config.path.dest + '/images', {read: false})
+    .pipe(clean());
+});
+
+// Run lossless compression on all the images.
+gulp.task('img', ['clean:img'], function() {
+  return gulp.src(config.img.entry_point + '/*.{png,gif,jpg}')
+    .pipe(imagemin({
+      progressive: true,
+      interlaced: true,
+      svgoPlugins: [{removeUnknownsAndDefaults: false}, {cleanupIDs: false}]
+    }))
+    .pipe(gulp.dest(config.path.dest + '/images'));
 });
 
 // Compile SASS
@@ -46,9 +66,14 @@ gulp.task('js', function(){
 
 // Define the watch task
 gulp.task('observe', function() {
+  // Img Watcher
+  gulp.watch(`${config.img.entry_point}/*.{png,gif,jpg}`, ['img'], (e) => {
+    console.log(`IMAGE ${e.type}: ${e.path}`);
+  });
   // Watch SASS files
-  const sassWatcher = gulp.watch(`${config.path.entry_point}/**/*.scss`, ['sass']);
-  sassWatcher.on('change', (e) => {console.log(`SASS ${e.type}: ${e.path}`);});
+  gulp.watch(`${config.path.entry_point}/**/*.scss`, ['sass'], (e) => {
+    console.log(`SASS ${e.type}: ${e.path}`);
+  });
   // Watch JS files
   const jsWatcher  = watchify(browserify({
     entries: [config.js.entry_point],
@@ -81,7 +106,7 @@ gulp.task('build', function() {
   return runSequence(
     'config-prod',
     'clean',
-    ['js', 'sass']
+    ['js', 'sass', 'img']
   );
 });
 
