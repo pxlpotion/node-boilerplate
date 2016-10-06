@@ -2,9 +2,10 @@
 This repo will serve as a boilerplate for standard MVC style Node.js applications. The application is built with minimum dependencies and is meant to be expanded on a per project basis.
 
 To run:
-- `git clone repo-name`
-- `cd repo-name`
+- `git clone https://github.com/pxlpotion/node-boilerplate.git`
+- `cd node-boilerplate`
 - `npm install`
+- `npm run build`
 - `npm start`
 
 The app should now be running on: `http://localhost:3000`. Note that this start script uses `nodemon` to monitor for changes and restart the server. A production script should be written to handle different deployments.
