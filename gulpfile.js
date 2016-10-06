@@ -28,19 +28,19 @@ gulp.task('clean', function () {
 // Used for watching imgs because we compress and pipe all imgs at once, which differs from
 // JS/SASS which just replaces a single file
 gulp.task('clean:img', function () {
-  return gulp.src(config.path.dest + '/images', {read: false})
+  return gulp.src(`${config.path.dest}/images`, {read: false})
     .pipe(clean());
 });
 
 // Run lossless compression on all the images.
 gulp.task('img', ['clean:img'], function() {
-  return gulp.src(config.img.entry_point + '/*.{png,gif,jpg}')
+  return gulp.src(`${config.img.entry_point}/*.{png,gif,jpg}`)
     .pipe(imagemin({
       progressive: true,
       interlaced: true,
       svgoPlugins: [{removeUnknownsAndDefaults: false}, {cleanupIDs: false}]
     }))
-    .pipe(gulp.dest(config.path.dest + '/images'));
+    .pipe(gulp.dest(`${config.path.dest}/images`));
 });
 
 // Compile SASS
@@ -66,7 +66,7 @@ gulp.task('js', function(){
 
 // Define the watch task
 gulp.task('observe', function() {
-  // Img Watcher
+  // Watch Image files
   gulp.watch(`${config.img.entry_point}/*.{png,gif,jpg}`, ['img'], (e) => {
     console.log(`IMAGE ${e.type}: ${e.path}`);
   });
