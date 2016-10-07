@@ -13,10 +13,25 @@ const returnConfig = require('./config/gulp'),
       sass = require('gulp-sass'),
       prefixCSS = require('gulp-autoprefixer'),
       minifyCSS = require('gulp-minify-css'),
-      imagemin  = require('gulp-imagemin');
+      imagemin = require('gulp-imagemin'),
+      spawn = require('child_process').spawn;
 
 // Define a generic config, this will be dynamically set before running any tasks
 let config = returnConfig();
+let node;
+
+// Start/restart the server
+gulp.task('server', function() {
+  if (node) {
+    node.kill();
+  }
+  node = spawn('node', ['app.js'], {stdio: 'inherit'});
+  node.on('close', function (code) {
+    if (code === 8) {
+      gulp.log('Error detected, waiting for changes...');
+    }
+  });
+});
 
 // Clean the enire target dir
 gulp.task('clean', function () {
@@ -66,6 +81,14 @@ gulp.task('js', function(){
 
 // Define the watch task
 gulp.task('observe', function() {
+  // Watch Server and Config files
+  gulp.watch([
+    './*.*', // watch all files in root (files, not dirs)
+    './app/server/**/*.*', // watch server files (client dir has own wathcers)
+    './config/**/*.*', // watch config files
+  ], ['server'], (e) => {
+    console.log(`SERVER ${e.type}: ${e.path}`);
+  });
   // Watch Image files
   gulp.watch(`${config.img.entry_point}/*.{png,gif,jpg}`, ['img'], (e) => {
     console.log(`IMAGE ${e.type}: ${e.path}`);
@@ -111,5 +134,5 @@ gulp.task('build', ['config:prod'], function() {
 
 // Watch assets for development
 gulp.task('watch', ['config:dev'], function() {
-  return runSequence('observe');
+  return runSequence('server', 'observe');
 });
