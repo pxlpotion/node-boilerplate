@@ -7,8 +7,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
+const favicon = require('serve-favicon');
 
 module.exports = (app, config) => {
+
+  // Favicon
+  // NOTE: Without this browsers may make two requests, an additional to /favicon.ico
+  // NOTE: Module stores file in memory, so just get it from the build/dist dir
+  app.use(favicon('build/dist/images/favicon.png'));
 
   // Views
   app.set('views', config.root + '/app/server/views');
