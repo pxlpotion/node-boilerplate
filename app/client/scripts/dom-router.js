@@ -39,3 +39,5 @@ const domRouter = (namespace) => {
   };
   return methods;
 };
+
+module.exports = domRouter;
