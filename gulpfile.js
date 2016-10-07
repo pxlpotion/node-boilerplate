@@ -49,7 +49,7 @@ gulp.task('clean:img', function () {
 
 // Run lossless compression on all the images.
 gulp.task('img', ['clean:img'], function() {
-  return gulp.src(`${config.img.entry_point}/*.{png,gif,jpg}`)
+  return gulp.src(`${config.img.entry_point}/*.{png,gif,jpg,ico}`)
     .pipe(imagemin({
       progressive: true,
       interlaced: true,
@@ -90,7 +90,7 @@ gulp.task('observe', function() {
     console.log(`SERVER ${e.type}: ${e.path}`);
   });
   // Watch Image files
-  gulp.watch(`${config.img.entry_point}/*.{png,gif,jpg}`, ['img'], (e) => {
+  gulp.watch(`${config.img.entry_point}/*.{png,gif,jpg,ico}`, ['img'], (e) => {
     console.log(`IMAGE ${e.type}: ${e.path}`);
   });
   // Watch SASS files
@@ -134,5 +134,5 @@ gulp.task('build', ['config:prod'], function() {
 
 // Watch assets for development
 gulp.task('watch', ['config:dev'], function() {
-  return runSequence('server', 'observe');
+  return runSequence(['img', 'sass', 'js'], 'server', 'observe');
 });
