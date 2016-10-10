@@ -1,13 +1,13 @@
 'use strict';
 
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const compress = require('compression');
-const methodOverride = require('method-override');
-const favicon = require('serve-favicon');
+const express = require('express'),
+      fs = require('fs'),
+      path = require('path'),
+      cookieParser = require('cookie-parser'),
+      bodyParser = require('body-parser'),
+      compress = require('compression'),
+      methodOverride = require('method-override'),
+      favicon = require('serve-favicon');
 
 module.exports = (app, config) => {
 
