@@ -5,7 +5,7 @@ This repo will serve as a boilerplate for standard MVC style Node.js application
 - `git clone https://github.com/pxlpotion/node-boilerplate.git`
 - `cd node-boilerplate`
 - `npm install`
-- `npm run watch`
+- `npm start`
 
 The app should now be running on: `http://localhost:3000`. 
 
