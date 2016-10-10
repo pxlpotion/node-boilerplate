@@ -126,10 +126,7 @@ gulp.task('config:dev', function() {
 
 // Build assets for production
 gulp.task('build', ['config:prod'], function() {
-  return runSequence(
-    'clean',
-    ['js', 'sass', 'img']
-  );
+  return runSequence('clean', ['js', 'sass', 'img']);
 });
 
 // Watch assets for development
