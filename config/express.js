@@ -11,9 +11,11 @@ const express = require('express'),
 
 module.exports = (app, config) => {
 
-  // Favicon
-  // NOTE: Module stores file in memory, so just get it from the build/dist dir
-  app.use(favicon('build/dist/images/favicon.ico'));
+  // Favicon & Static files
+  // NOTE: This is where/how files are served from the diff build dirs for dev/prod
+  let assetsPath = config.root + config.app.assets_path;
+  app.use(express.static(assetsPath));
+  app.use(favicon(assetsPath + '/images/favicon.ico'));
 
   // Views
   app.set('views', config.root + '/app/server/views');
@@ -24,15 +26,12 @@ module.exports = (app, config) => {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
 
-  // Make some stuff available to Jade
+  // Make some stuff available to Pug
   app.locals.moment = require('moment');
 
   // Manage Req's and Res's
   app.use(compress());
   app.use(methodOverride());
-
-  // Serve static assets
-  app.use(express.static(config.root + config.app.assets_path));
 
   // Recursive loading will load all files in given path and all subdirectories
   const loadRecursively = (path) => {
