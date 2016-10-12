@@ -12,19 +12,19 @@ html(lang='en')
     meta(name='msapplication-TileColor' content='')
 
     link(rel='shortcut icon' href='images/favicon.ico' type='image/x-icon')
-    -// link(rel='icon' type='image/png' href='')
-    -// link(rel='apple-touch-icon' href='')
+    //- link(rel='icon' type='image/png' href='')
+    //- link(rel='apple-touch-icon' href='')
 
     title #{title}
 
-    -// CSS (all other files should be built via gulp, see app/client/main.scss)
+    //- CSS (all other files should be built via gulp, see app/client/main.scss)
     link(rel='stylesheet', href='/main.css')
 
-  -// Body and Main Content
-  -// Note the `routerClass` which is passed from the controller and is used for the dom-router
+  //- Body and Main Content
+  //- Note the `routerClass` which is passed from the controller and is used for the dom-router
   body(class=routerClass)
     block content
 
-    -// JS (all other files should be built via gulp, see app/client/main.js)
+    //- JS (all other files should be built via gulp, see app/client/main.js)
     script(src='/bundle.js')
 
