@@ -27,7 +27,7 @@
     "le_node": "^1.6.5",
     "method-override": "^2.3.6",
     "moment": "^2.14.1",
-    "pug": "^0.1.0",
+    "pug": "2.0.0-beta6",
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
