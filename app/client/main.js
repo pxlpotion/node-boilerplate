@@ -10,8 +10,9 @@ const pxlPotion = {
     },
     finalize: function() {}
   },
-  'about': {
+  'example': {
     init: function() {
+      console.log('I am only fired on a page with "example" as a class on the body, which is passed to Pug via the controller and "routerClass". See app/server/controllers/example.js and app/server/views/layouts/base.pug');
     },
     finalize: function() {}
   }

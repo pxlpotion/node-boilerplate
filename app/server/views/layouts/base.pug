@@ -21,7 +21,8 @@ html(lang='en')
     link(rel='stylesheet', href='/main.css')
 
   -// Body and Main Content
-  body
+  -// Note the `routerClass` which is passed from the controller and is used for the dom-router
+  body(class=routerClass)
     block content
 
     -// JS (all other files should be built via gulp, see app/client/main.js)

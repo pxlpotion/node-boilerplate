@@ -9,7 +9,7 @@ app.route('/')
   .get((req, res) => {
     //res.send('this is an example GET response');
     // Or you can render HTML
-    res.render('example', {text: 'Example Text'});
+    res.render('example', {routerClass: 'example', text: 'Example Text'});
   })
 
   .post((req, res) => {
