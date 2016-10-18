@@ -14,13 +14,14 @@ const returnConfig = require('./config/gulp'),
       prefixCSS = require('gulp-autoprefixer'),
       minifyCSS = require('gulp-minify-css'),
       imagemin = require('gulp-imagemin'),
+      livereload = require('gulp-livereload'),
       spawn = require('child_process').spawn;
 
 // Define a generic config, this will be dynamically set before running any tasks
 let config = returnConfig();
 let node;
 
-// Start/restart the server
+// Start/restart the actual server
 gulp.task('server', function() {
   if (node) {
     node.kill();
@@ -31,6 +32,11 @@ gulp.task('server', function() {
       gulp.log('Error detected, waiting for changes...');
     }
   });
+});
+
+// Start the livereload "server" to reload the browser window on changes
+gulp.task('livereload', function() {
+  livereload.listen();
 });
 
 // Clean the enire target dir
@@ -82,32 +88,42 @@ gulp.task('js', function(){
 // Define the watch task
 gulp.task('observe', function() {
   // Watch Server and Config files
-  gulp.watch([
+  const serverWatcher = gulp.watch([
     './*.*', // watch all files in root (files, not dirs)
     './app/server/**/*.*', // watch server files (client dir has own wathcers)
     './config/**/*.*', // watch config files
-  ], ['server'], (e) => {
+  ], ['server']);
+  serverWatcher.on('change', (e) => {
+    livereload.changed(e.path);
     console.log(`SERVER ${e.type}: ${e.path}`);
   });
   // Watch Image files
-  gulp.watch(`${config.img.entry_point}/*.{png,gif,jpg,ico}`, ['img'], (e) => {
+  const imgWatcher = gulp.watch(`${config.img.entry_point}/*.{png,gif,jpg,ico}`, ['img']);
+  imgWatcher.on('change', (e) => {
+    livereload.changed(e.path);
     console.log(`IMAGE ${e.type}: ${e.path}`);
   });
   // Watch SASS files
-  gulp.watch(`${config.path.entry_point}/**/*.scss`, ['sass'], (e) => {
+  const sassWatcher = gulp.watch(`${config.path.entry_point}/**/*.scss`, ['sass'], (e) => {
+    console.log(`SASS ${e.type}: ${e.path}`);
+  });
+  sassWatcher.on('change', (e) => {
+    livereload.changed(e.path);
     console.log(`SASS ${e.type}: ${e.path}`);
   });
   // Watch JS files
+  // Note this does not use the 'js' task and instead uses wathify for faster builds
   const jsWatcher  = watchify(browserify({
     entries: [config.js.entry_point],
     transform: [['babelify', {presets: ['es2015']}]],
     debug: true,
     cache: {}, packageCache: {}, fullPaths: true
   }));
-  return jsWatcher.on('update', function () {
+  return jsWatcher.on('update', () => {
     jsWatcher.bundle()
       .pipe(source(config.js.out))
-      .pipe(gulp.dest(config.path.dest));
+      .pipe(gulp.dest(config.path.dest))
+      .pipe(livereload());
       console.log('JS File updated');
   })
     .bundle()
@@ -131,5 +147,6 @@ gulp.task('build', ['config:prod'], function() {
 
 // Watch assets for development
 gulp.task('watch', ['config:dev'], function() {
-  return runSequence(['img', 'sass', 'js'], 'server', 'observe');
+  // Build all the assets initially, start the server and reloader, watch for changes
+  return runSequence(['img', 'sass', 'js'], 'server', 'livereload', 'observe');
 });
