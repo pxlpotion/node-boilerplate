@@ -15,6 +15,7 @@ const returnConfig = require('./config/gulp'),
       minifyCSS = require('gulp-minify-css'),
       imagemin = require('gulp-imagemin'),
       livereload = require('gulp-livereload'),
+      chalk = require('chalk'),
       spawn = require('child_process').spawn;
 
 // Define a generic config, this will be dynamically set before running any tasks
@@ -29,7 +30,7 @@ gulp.task('server', function() {
   node = spawn('node', ['app.js'], {stdio: 'inherit'});
   node.on('close', function (code) {
     if (code === 8) {
-      console.log('Error detected, waiting for changes...');
+      console.log(chalk.red('Error detected, waiting for changes...'));
     }
   });
 });
@@ -68,8 +69,8 @@ gulp.task('img', ['clean:img'], function() {
 gulp.task('sass', function () {
   return gulp.src(config.sass.entry_point)
     .pipe(sass().on('error', sass.logError))
-    .pipe(prefixCSS().on('error', (e) => {console.log(e);}))
-    .pipe(minifyCSS().on('error', (e) => {console.log(e);}))
+    .pipe(prefixCSS().on('error', (e) => {console.log(chalk.red(e));}))
+    .pipe(minifyCSS().on('error', (e) => {console.log(chalk.red(e));}))
     .pipe(gulp.dest(config.path.dest));
 });
 
@@ -81,7 +82,7 @@ gulp.task('js', function(){
   })
     .bundle()
     .pipe(source(config.js.out))
-    .pipe(streamify(uglify(config.js.out)).on('error', (e) => {console.log(e);}))
+    .pipe(streamify(uglify(config.js.out)).on('error', (e) => {console.log(chalk.red(e));}))
     .pipe(gulp.dest(config.path.dest));
 });
 
@@ -95,19 +96,19 @@ gulp.task('observe', function() {
   ], ['server']);
   serverWatcher.on('change', (e) => {
     livereload.changed(e.path);
-    console.log(`SERVER ${e.type}: ${e.path}`);
+    console.log(chalk.dim(`SERVER ${e.type}: ${e.path}`));
   });
   // Watch Image files
   const imgWatcher = gulp.watch(`${config.img.entry_point}/*.{png,gif,jpg,ico}`, ['img']);
   imgWatcher.on('change', (e) => {
     livereload.changed(e.path);
-    console.log(`IMAGE ${e.type}: ${e.path}`);
+    console.log(chalk.dim(`IMAGE ${e.type}: ${e.path}`));
   });
   // Watch SASS files
   const sassWatcher = gulp.watch(`${config.path.entry_point}/**/*.scss`, ['sass']);
   sassWatcher.on('change', (e) => {
     livereload.changed(e.path);
-    console.log(`SASS ${e.type}: ${e.path}`);
+    console.log(chalk.dim(`SASS ${e.type}: ${e.path}`));
   });
   // Watch JS files
   // Note this does not use the 'js' task and instead uses wathify for faster builds
@@ -124,7 +125,7 @@ gulp.task('observe', function() {
       // Note that we use .pipe() to handle live reload here, instead of livereload.changed(e.path)
       // like the other watchers. This is because wathify does not pass back an event.
       .pipe(livereload());
-      console.log('JS File updated');
+      console.log(chalk.dim('JS File updated'));
   })
     .bundle()
     .pipe(source(config.js.out))
