@@ -8,7 +8,7 @@ const returnConfig = require('./config/gulp'),
       browserify = require('browserify'),
       watchify = require('watchify'),
       streamify = require('gulp-streamify'),
-      runSequence = require('gulp-run-sequence'),
+      runSequence = require('run-sequence'),
       clean = require('gulp-clean'),
       sass = require('gulp-sass'),
       prefixCSS = require('gulp-autoprefixer'),
@@ -29,7 +29,7 @@ gulp.task('server', function() {
   node = spawn('node', ['app.js'], {stdio: 'inherit'});
   node.on('close', function (code) {
     if (code === 8) {
-      gulp.log('Error detected, waiting for changes...');
+      console.log('Error detected, waiting for changes...');
     }
   });
 });
@@ -75,7 +75,7 @@ gulp.task('sass', function () {
 
 // Compile JS
 gulp.task('js', function(){
-  browserify({
+  return browserify({
     entries: [config.js.entry_point],
     transform: [['babelify', {presets: ['es2015']}]]
   })
@@ -104,9 +104,7 @@ gulp.task('observe', function() {
     console.log(`IMAGE ${e.type}: ${e.path}`);
   });
   // Watch SASS files
-  const sassWatcher = gulp.watch(`${config.path.entry_point}/**/*.scss`, ['sass'], (e) => {
-    console.log(`SASS ${e.type}: ${e.path}`);
-  });
+  const sassWatcher = gulp.watch(`${config.path.entry_point}/**/*.scss`, ['sass']);
   sassWatcher.on('change', (e) => {
     livereload.changed(e.path);
     console.log(`SASS ${e.type}: ${e.path}`);
@@ -119,10 +117,12 @@ gulp.task('observe', function() {
     debug: true,
     cache: {}, packageCache: {}, fullPaths: true
   }));
-  return jsWatcher.on('update', () => {
+  jsWatcher.on('update', () => {
     jsWatcher.bundle()
       .pipe(source(config.js.out))
       .pipe(gulp.dest(config.path.dest))
+      // Note that we use .pipe() to handle live reload here, instead of livereload.changed(e.path)
+      // like the other watchers. This is because wathify does not pass back an event.
       .pipe(livereload());
       console.log('JS File updated');
   })
