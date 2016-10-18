@@ -28,3 +28,7 @@ html(lang='en')
     //- JS (all other files should be built via gulp, see app/client/main.js)
     script(src='/bundle.js')
 
+    //- Used in dev mode only to live reload on changes
+    if(env === 'development')
+      script(src='http://localhost:35729/livereload.js')
+
