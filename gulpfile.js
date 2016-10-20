@@ -81,6 +81,10 @@ gulp.task('js', function(){
     transform: [['babelify', {presets: ['es2015']}]]
   })
     .bundle()
+    .on('error', (e) => {
+      console.log(chalk.red(e));
+      this.emit('end');
+    })
     .pipe(source(config.js.out))
     .pipe(streamify(uglify(config.js.out)).on('error', (e) => {console.log(chalk.red(e));}))
     .pipe(gulp.dest(config.path.dest));
@@ -120,6 +124,10 @@ gulp.task('observe', function() {
   }));
   jsWatcher.on('update', () => {
     jsWatcher.bundle()
+      .on('error', (e) => {
+        console.log(chalk.red(e));
+        this.emit('end');
+      })
       .pipe(source(config.js.out))
       .pipe(gulp.dest(config.path.dest))
       // Note that we use .pipe() to handle live reload here, instead of livereload.changed(e.path)
@@ -128,6 +136,10 @@ gulp.task('observe', function() {
       console.log(chalk.dim('JS File updated'));
   })
     .bundle()
+    .on('error', (e) => {
+      console.log(chalk.red(e));
+      this.emit('end');
+    })
     .pipe(source(config.js.out))
     .pipe(gulp.dest(config.path.dest));
 });
