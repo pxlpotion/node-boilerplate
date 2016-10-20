@@ -30,7 +30,7 @@ gulp.task('server', function() {
   node = spawn('node', ['app.js'], {stdio: 'inherit'});
   node.on('close', function (code) {
     if (code === 8) {
-      console.log(chalk.red('Error detected, waiting for changes...'));
+      console.log(chalk.bgRed('Error detected, waiting for changes...'));
     }
   });
 });
@@ -69,8 +69,8 @@ gulp.task('img', ['clean:img'], function() {
 gulp.task('sass', function () {
   return gulp.src(config.sass.entry_point)
     .pipe(sass().on('error', sass.logError))
-    .pipe(prefixCSS().on('error', (e) => {console.log(chalk.red(e));}))
-    .pipe(minifyCSS().on('error', (e) => {console.log(chalk.red(e));}))
+    .pipe(prefixCSS().on('error', (e) => {console.log(chalk.bgRed(e));}))
+    .pipe(minifyCSS().on('error', (e) => {console.log(chalk.bgRed(e));}))
     .pipe(gulp.dest(config.path.dest));
 });
 
@@ -82,11 +82,11 @@ gulp.task('js', function(){
   })
     .bundle()
     .on('error', (e) => {
-      console.log(chalk.red(e));
+      console.log(chalk.bgRed(e));
       this.emit('end');
     })
     .pipe(source(config.js.out))
-    .pipe(streamify(uglify(config.js.out)).on('error', (e) => {console.log(chalk.red(e));}))
+    .pipe(streamify(uglify(config.js.out)).on('error', (e) => {console.log(chalk.bgRed(e));}))
     .pipe(gulp.dest(config.path.dest));
 });
 
@@ -125,7 +125,7 @@ gulp.task('observe', function() {
   jsWatcher.on('update', () => {
     jsWatcher.bundle()
       .on('error', (e) => {
-        console.log(chalk.red(e));
+        console.log(chalk.bgRed(e));
         this.emit('end');
       })
       .pipe(source(config.js.out))
@@ -137,7 +137,7 @@ gulp.task('observe', function() {
   })
     .bundle()
     .on('error', (e) => {
-      console.log(chalk.red(e));
+      console.log(chalk.bgRed(e));
       this.emit('end');
     })
     .pipe(source(config.js.out))
