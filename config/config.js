@@ -36,13 +36,13 @@ const config = {
     },
     port: process.env.PORT,
     db: {
-      MONGODB_URI: process.env.MONGODB_URI
+      MONGODB_URI: process.env[appName + '_MONGODB_URI']
     },
     redis: {
-      REDIS_URL: process.env.REDIS_URL
+      REDIS_URL: process.env[appName + '_REDIS_URL']
     },
     logs: {
-      LE_TOKEN: process.env.LE_TOKEN
+      LE_TOKEN: process.env[appName + '_LE_TOKEN']
     }
   },
   production: {
@@ -55,13 +55,13 @@ const config = {
     },
     port: process.env.PORT,
     db: {
-      MONGODB_URI: process.env.MONGODB_URI
+      MONGODB_URI: process.env[appName + '_MONGODB_URI']
     },
     redis: {
-      REDIS_URL: process.env.REDIS_URL
+      REDIS_URL: process.env[appName + '_REDIS_URL']
     },
     logs: {
-      LE_TOKEN: process.env.LE_TOKEN
+      LE_TOKEN: process.env[appName + '_LE_TOKEN']
     }
   }
 };
