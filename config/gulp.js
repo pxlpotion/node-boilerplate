@@ -2,7 +2,7 @@
 
 // Gulp Config
 const returnConfig = function(mode) {
-  let dir = mode === 'prod' ? 'dist' : 'src';
+  let dir = mode === 'build' ? 'dist' : 'src';
   let path = {
     dest: `build/${dir}`,
     entry_point: `app/client`

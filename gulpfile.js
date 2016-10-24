@@ -145,21 +145,21 @@ gulp.task('observe', function() {
 });
 
 
-// Setup the config for prod or dev
-gulp.task('config:prod', function() {
-  config = returnConfig('prod');
+// Setup the config for build or watch
+gulp.task('config:build', function() {
+  config = returnConfig('build');
 });
-gulp.task('config:dev', function() {
-  config = returnConfig('dev');
+gulp.task('config:watch', function() {
+  config = returnConfig('watch');
 });
 
 // Build assets for production
-gulp.task('build', ['config:prod'], function() {
+gulp.task('build', ['config:build'], function() {
   return runSequence('clean', ['js', 'sass', 'img']);
 });
 
 // Watch assets for development
-gulp.task('watch', ['config:dev'], function() {
+gulp.task('watch', ['config:watch'], function() {
   // Build all the assets initially, start the server and reloader, watch for changes
   return runSequence(['img', 'sass', 'js'], 'server', 'livereload', 'observe');
 });
