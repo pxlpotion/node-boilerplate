@@ -1,7 +1,8 @@
-# App Specific
-.*
+# Don't store environment variables
+.env*
 
-
+# /build/src directory is generated and should not be tracked
+build/src/*
 
 # Taken from https://github.com/github/gitignore/blob/master/Node.gitignore
 
