@@ -3,7 +3,8 @@
 const path = require('path'),
       rootPath = path.normalize(__dirname + '/..'),
       env = process.env.NODE_ENV || 'development',
-      appName = 'appName';
+      packageJSON = require('../package.json'),
+      appName = packageJSON.name;
 
 const config = {
   development: {
@@ -11,7 +12,8 @@ const config = {
     root: rootPath,
     app: {
       name: appName,
-      assets_path: '/build/src'
+      assets_path: '/build/src',
+      main: packageJSON.main
     },
     port: 3000,
     db: {
@@ -29,7 +31,8 @@ const config = {
     root: rootPath,
     app: {
       name: appName,
-      assets_path: '/build/dist'
+      assets_path: '/build/dist',
+      main: packageJSON.main
     },
     port: process.env.PORT,
     db: {
@@ -47,7 +50,8 @@ const config = {
     root: rootPath,
     app: {
       name: appName,
-      assets_path: '/build/dist'
+      assets_path: '/build/dist',
+      main: packageJSON.main
     },
     port: process.env.PORT,
     db: {

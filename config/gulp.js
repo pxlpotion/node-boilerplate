@@ -1,5 +1,7 @@
 'use strict';
 
+const appConfig = require('./config.js');
+
 // Gulp Config
 const returnConfig = function(mode) {
   let dir = mode === 'build' ? 'dist' : 'src';
@@ -8,6 +10,7 @@ const returnConfig = function(mode) {
     entry_point: `app/client`
   };
   let config = {
+    main: appConfig.app.main,
     path: path,
     img: {
       entry_point: `${path.entry_point}/images`
