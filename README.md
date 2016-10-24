@@ -21,6 +21,7 @@ NOTES:
 ## What to do next:
 
 ### Server side
+- Navigate to the `/ops/env.example` file and follow its directions.
 - Navigate to the `/config/config.js` file and setup different environment variables.
 - Navigate to the `/app/server/controllers/example.js` file and either delete it or rename/refactor it.
 - Navigate to the `/app/server/middlewares/example.js` file and either delete it or rename/refactor it.
@@ -32,12 +33,12 @@ The app makes no assumptions on models or what DB to use. You will need to setup
 JS
 
 - Navigate to the `/app/client/scripts/example.js` file and either delete it or rename/refactor it.
-- Navigate to the `/app/client/main.js` file and update it accordingly.
+- Navigate to the `/app/client/main.js` file and update it accordingly. Note that any new JS files need to be imported from this main file in order to be compiled.
 
 CSS
 
 - Navigate to the `/app/client/styles/example.scss` file and either delete it or rename/refactor it.
-- Navigate to the `/app/client/main.scss` file and update it accordingly.
+- Navigate to the `/app/client/main.scss` file and update it accordingly. Note that any new SCSS files need to be imported from this main file in order to be compiled.
 
 ## The little stuff:
 - You may also want to add a `.jshintrc` file into the root of the directory (which is ignored via `.gitignore`) with the follow options:
