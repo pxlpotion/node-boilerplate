@@ -35,22 +35,22 @@ module.exports = (app, config) => {
   app.use(methodOverride());
 
   // Recursive loading will load all files in given path and all subdirectories
-  const loadRecursively = (path) => {
+  const loadRecursively = (path, app, config) => {
     fs.readdirSync(path).forEach((file) => {
       if (file.indexOf('.js') >= 0) {
         require(path + '/' + file)(app, config);
       } else {
-        loadRecursively(path + '/' + file);
+        loadRecursively(path + '/' + file, app, config);
       }
     });
   };
 
   // Load Middleware
   const middlewaresPath = path.join(__dirname, '../app/server/middlewares');
-  loadRecursively(middlewaresPath);
+  loadRecursively(middlewaresPath, app, config);
 
   // Load Controllers
   const controllersPath = path.join(__dirname, '../app/server/controllers');
-  loadRecursively(controllersPath);
+  loadRecursively(controllersPath, app, config);
 
 };
