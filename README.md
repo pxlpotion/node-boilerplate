@@ -5,7 +5,7 @@ This repo will serve as a boilerplate for standard MVC style Node.js application
 - `git clone https://github.com/pxlpotion/node-boilerplate.git`
 - `cd node-boilerplate`
 - `npm install`
-- `npm run dev`
+- `npm run watch`
 
 The app should now be running on: `http://localhost:3000`. Any changes will be automatically recompiled and the browser window will be automatically reloaded.
 
@@ -14,7 +14,7 @@ The app should now be running on: `http://localhost:3000`. Any changes will be a
 - `npm run build`
 
 NOTES:
-- Gulp runs the `watch` task (aka `npm run dev`) with flag `-- silent` by default to remove all of the cruft in the terminal. This can be removed from the package.json file. The `build` task (aka `npm run build` does not run silently, but could...)
+- Gulp runs the `watch` task (aka `npm run watch`) with flag `-- silent` by default to remove all of the cruft in the terminal. This can be removed from the package.json file. The `build` task (aka `npm run build` does not run silently, but could...)
 - A production script should be written to handle different deployments and assigned to `npm start`. There is no pre-described deployment script included.
 - Any new CLI commands should be "piped" through an NPM script to keep things consistent. For example, a new Gulp script should be defined like `"exampleTask" : "gulp exampleTask"` in the scripts section of `package.json` and then run with NPM like `npm run exampleTask`
 
