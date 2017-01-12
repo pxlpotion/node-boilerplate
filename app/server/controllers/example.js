@@ -2,9 +2,9 @@
 
 // This file should be deleted or renamed/refactored
 
-module.exports = (app, config) => {
+module.exports = (router) => {
 
-app.route('/')
+router.route('/')
 
   .get((req, res) => {
     //res.send('this is an example GET response');

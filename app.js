@@ -34,23 +34,29 @@ app.use(compress());
 app.use(methodOverride());
 
 // Recursive loading will load all files in given path and all subdirectories
-const loadRecursively = (path, app, config) => {
+const loadRecursively = (path, router) => {
 	fs.readdirSync(path).forEach((file) => {
 		if (file.indexOf('.js') >= 0) {
-			require(path + '/' + file)(app, config);
+			require(path + '/' + file)(router);
 		} else {
-			loadRecursively(path + '/' + file, app, config);
+			loadRecursively(path + '/' + file, router);
 		}
 	});
 };
 
+// Init and app.use the router, then load middlewares and controllers
+// NOTE: Additional routers can/should be created for different needs.
+// https://scotch.io/tutorials/learn-to-use-the-new-router-in-expressjs-4
+const router = express.Router();
+app.use('/', router);
+
 // Load Middleware
 const middlewaresPath = config.root + '/app/server/middlewares';
-loadRecursively(middlewaresPath, app, config);
+loadRecursively(middlewaresPath, router);
 
 // Load Controllers
 const controllersPath = config.root + '/app/server/controllers';
-loadRecursively(controllersPath, app, config);
+loadRecursively(controllersPath, router);
 
 // Start the server
 const server = app.listen(config.port, () => {

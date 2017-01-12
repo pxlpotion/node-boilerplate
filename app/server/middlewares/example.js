@@ -2,9 +2,9 @@
 
 // This file should be deleted or renamed/refactored
 
-module.exports = (app) => {
+module.exports = (router) => {
 
-  app.use((req, res, next) => {
+  router.use((req, res, next) => {
     console.log('I am a middleware process on each request.');
     next();
   });
