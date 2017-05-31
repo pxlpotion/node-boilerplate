@@ -47,3 +47,6 @@ jspm_packages
 
 # Linter Settings
 .jshintrc
+
+# DS_Store
+.DS_Store
